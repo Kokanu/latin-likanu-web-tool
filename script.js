@@ -25,13 +25,27 @@ ouTypeVertical.oninput = ouTypeBMacra.oninput = quoteTypeSquare.oninput = quoteT
 
 let index = (loc, val) => loc.indexOf(val.toLowerCase());
 
-latinIn.oninput = function (e) {
+let updateUrl = function () {
     url.searchParams.delete("lat");
     if (latinIn.value) {
         url.searchParams.set("lat", latinIn.value);
     }
-    window.history.pushState(window.history.state, "", url);
-    
+    url.searchParams.delete("lik");
+    if (likanuIn.value) {
+        url.searchParams.set("lik", likanuIn.value);
+    }
+    window.history.replaceState({}, "", url);
+};
+
+let updateUrlTimeout = null;
+let triggerUpdateUrl = function() {
+    if (updateUrlTimeout) {
+        clearTimeout(updateUrlTimeout);
+    }
+    setTimeout(function () {updateUrl(); updateUrlTimeout = null;}, 2000);
+};
+
+latinIn.oninput = function (e) {
     let diacritic = ouTypeMacron.checked
         ? "\u0304"
         : ouTypeBMacra.checked
@@ -73,6 +87,7 @@ latinIn.oninput = function (e) {
         .replace(/\r?\n/g, "\uFFFE");
     // Update actual output through innerHTML and only now update line breaks
     likanuOut.innerHTML = likanuOutText.innerHTML.replace(/\uFFFE/g, "<br />");
+    triggerUpdateUrl();
 };
 
 copyLikanu.onclick = (e) => {
@@ -83,12 +98,6 @@ copyLikanu.onclick = (e) => {
 };
 
 likanuIn.oninput = function (e) {
-    url.searchParams.delete("lik");
-    if (likanuIn.value) {
-        url.searchParams.set("lik", likanuIn.value);
-    }
-    window.history.pushState(window.history.state, "", url);
-
     latinOutText.innerText = likanuIn.value
         // Replace puncutation (aside from transliteration marks)
         .replace(/\uFF64/g, ",")
@@ -127,6 +136,7 @@ likanuIn.oninput = function (e) {
         .replace(/\r?\n/g, "\uFFFE");
     // Update actual output through innerHTML and only now update line breaks
     latinOut.innerHTML = latinOutText.innerHTML.replace(/\uFFFE/g, "\n");
+    triggerUpdateUrl();
 };
 
 latinIn.onfocus = (e) => e.target.select();
