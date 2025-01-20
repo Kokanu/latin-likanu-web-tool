@@ -19,11 +19,19 @@ let latinOutText = document.getElementById("latinOutText");
 let latinOut = document.getElementById("latinOut");
 let copyLatin = document.getElementById("copyLatin");
 
+const url = new URL(window.location.href);
+
 ouTypeVertical.oninput = ouTypeBMacra.oninput = quoteTypeSquare.oninput = quoteTypeButton.oninput = ouTypeTilde.oninput = ouTypeMacron.oninput = commaToggle.oninput = () => latinIn.oninput();
 
 let index = (loc, val) => loc.indexOf(val.toLowerCase());
 
 latinIn.oninput = function (e) {
+    url.searchParams.delete("lat");
+    if (latinIn.value) {
+        url.searchParams.set("lat", latinIn.value);
+    }
+    window.history.pushState(window.history.state, "", url);
+    
     let diacritic = ouTypeMacron.checked
         ? "\u0304"
         : ouTypeBMacra.checked
@@ -75,6 +83,12 @@ copyKokanu.onclick = (e) => {
 };
 
 kokanuIn.oninput = function (e) {
+    url.searchParams.delete("lik");
+    if (kokanuIn.value) {
+        url.searchParams.set("lik", kokanuIn.value);
+    }
+    window.history.pushState(window.history.state, "", url);
+
     latinOutText.innerText = kokanuIn.value
         // Replace puncutation (aside from transliteration marks)
         .replace(/\uFF64/g, ",")
@@ -128,7 +142,10 @@ copyLatin.onclick = (e) => {
     setTimeout(() => e.target.classList.remove("flash"), 1000);
 };
 
-latinIn.textContent = `a an i in e en u un o on
+if (url.searchParams.has("lat")) {
+    latinIn.textContent = url.searchParams.get("lat");
+} else {
+    latinIn.textContent = `a an i in e en u un o on
 pa pan pi pin pe pen pu pun po pon
 ta tan ti tin te ten tu tun to ton
 ka kan ki kin ke ken ku kun ko kon
@@ -141,5 +158,9 @@ sa san si sin se sen su sun so son
 ha han hi hin he hen hu hun ho hon
 ca can ci cin ce cen cu cun co con
 " " { } , . : ? !`;
-
+}
+if (url.searchParams.has("lik")) {
+    kokanuIn.textContent = url.searchParams.get("lik");
+}
 latinIn.oninput();
+kokanuIn.oninput();
