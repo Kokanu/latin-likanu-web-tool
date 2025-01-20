@@ -30,7 +30,7 @@ let updateUrl = () => {
 let updateUrlTimeout = null;
 let triggerUpdateUrl = () => {
     clearTimeout(updateUrlTimeout);
-    setTimeout(() => {updateUrl(); updateUrlTimeout = null;}, 2000);
+    updateUrlTimeout = setTimeout(updateUrl, 2000);
 };
 
 latinIn.oninput = (e) => {
@@ -78,9 +78,6 @@ ouTypeVertical.oninput = ouTypeBMacra.oninput = quoteTypeSquare.oninput = quoteT
 latinIn.onfocus = (e) => e.target.select();
 likanuOutText.onfocus = (e) => e.target.select();
 
-likanuIn.onfocus = (e) => e.target.select();
-latinOutText.onfocus = (e) => e.target.select();
-
 copyLatin.onclick = (e) => {
     // Copy the text inside the text field
     navigator.clipboard.writeText(latinOut.innerText);
@@ -91,7 +88,6 @@ copyLatin.onclick = (e) => {
 window.onload = (e) => {
     if (url.searchParams.has("lat")) {
         latinIn.textContent = url.searchParams.get("lat");
-        latinIn.oninput();
     } else {
         latinIn.textContent = `a an i in e en u un o on
 pa pan pi pin pe pen pu pun po pon
@@ -106,12 +102,11 @@ sa san si sin se sen su sun so son
 ha han hi hin he hen hu hun ho hon
 ca can ci cin ce cen cu cun co con
 " " { } , . : ? !`;
-        latinIn.oninput();
-        clearTimeout(updateUrlTimeout);
     }
     if (url.searchParams.has("lik")) {
         likanuIn.textContent = url.searchParams.get("lik");
     }
+    latinIn.oninput();
     likanuIn.oninput();
-    return true;
+    clearTimeout(updateUrlTimeout);
 };
