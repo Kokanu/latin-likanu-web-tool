@@ -3,75 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Likanu Transliterator</title>
-    <!-- Importing the CSS file -->
+    <title>Likanu Translator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="main-particle-particle" class="g-particle">
-        <h3>Translator</h3>
-        <fieldset>
-        <legend>Diacritics</legend>
-        <label><input id="ouTypeMacron" type="radio" name="ouType" checked="checked" />
-            macron /pon/ = [ ʜ̄ʃ ] /tun/ = [ x̄ſ ]
-        </label>
-        <br />
-        <label><input id="ouTypeTilde" type="radio" name="ouType" />
-            tilde /pon/ = [ ʜ̃ʃ ] /tun/ = [ x̃ſ ]
-        </label>
-        <br />
-        <label><input id="ouTypeBMacra" type="radio" name="ouType" />
-            macron-grave /pon/ = [ ʜ᷆ʃ ] /tun/ = [ x᷆ſ ]
-        </label>
-        <br />
-        <label><input id="ouTypeVertical" type="radio" name="ouType" />
-            vertical tilde /pon/ = [ ʜ̾ʃ ] /tun/ = [ x̾ſ ]
-        </label>
-        </fieldset>
-        <fieldset>
-        <legend>Punctuation</legend>
-        <label><input id="quoteTypeSquare" type="radio" name="quoteType" checked="checked" />
-            ｢ and ｣
-        </label>
-        <br />
-        <label><input id="quoteTypeButton" type="radio" name="quoteType" />
-            ◖ and ◗
-        </label>
-        <br />
-        <label><input id="commaToggle" type="checkbox" checked="checked" />
-            , = ､
-        </label>
-        </fieldset>
-        <div class="inWrapper">
-        Latin:
-        <textarea id="latinIn" cols="80" rows="3" spellcheck="false">a an i in e en u un o on
-    pa pan pi pin pe pen pu pun po pon
-    ta tan ti tin te ten tu tun to ton
-    ka kan ki kin ke ken ku kun ko kon
-    wa wan wi win we wen wu wun wo won
-    la lan li lin le len lu lun lo lon
-    ja jan ji jin je jen ju jun jo jon
-    ma man mi min me men mu mun mo mon
-    na nan ni nin ne nen nu nun no non
-    sa san si sin se sen su sun so son
-    ha han hi hin he hen hu hun ho hon
-    ca can ci cin ce cen cu cun co con
-    " " { } , . : ? !</textarea>
+    <div id="main-particle-particle" class="container mt-4">
+        <h1>Likanu Translator</h1>
+        <div class="row flex-column flex-md-row py-3">
+            <div class="col-sm-auto">
+                <div class="container border px-3 py-2">
+                    <fieldset class="mb-4">
+                        <legend class="fw-bold">Diacritics</legend>
+                        <div class="form-check">
+                            <input id="ouTypeMacron" class="form-check-input" type="radio" name="ouType" checked>
+                            <label class="form-check-label" for="ouTypeMacron">
+                                macron <small class="text-muted">/pon/ = [ ʜ̄ʃ ] /kun/ = [ x̄ſ ]</small>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="ouTypeTilde" class="form-check-input" type="radio" name="ouType">
+                            <label class="form-check-label" for="ouTypeTilde">
+                                tilde <small class="text-muted">/pon/ = [ ʜ̃ʃ ] /kun/ = [ x̃ſ ]</small>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="ouTypeBMacra" class="form-check-input" type="radio" name="ouType">
+                            <label class="form-check-label" for="ouTypeBMacra">
+                                macron-grave <small class="text-muted">/pon/ = [ ʜ᷆ʃ ] /kun/ = [ x᷆ſ ]</small>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="ouTypeVertical" class="form-check-input" type="radio" name="ouType">
+                            <label class="form-check-label" for="ouTypeVertical">
+                                vertical tilde <small class="text-muted">/pon/ = [ ʜ̾ʃ ] /kun/ = [ x̾ſ ]</small>
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend class="fw-bold">Punctuation</legend>
+                        <div class="form-check">
+                            <input id="quoteTypeSquare" class="form-check-input" type="radio" name="quoteType" checked>
+                            <label class="form-check-label" for="quoteTypeSquare">
+                                ｢ and ｣
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="quoteTypeButton" class="form-check-input" type="radio" name="quoteType">
+                            <label class="form-check-label" for="quoteTypeButton">
+                                ◖ and ◗
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input id="commaToggle" class="form-check-input" type="checkbox" checked>
+                            <label class="form-check-label" for="commaToggle">
+                                , = ､
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+            
+            <div class="col-sm">
+                <div class="mb-3">
+                    <label for="latinIn" class="form-label fs-4">Latin:</label>
+                    <textarea id="latinIn" class="form-control form-control-lg" rows="3" spellcheck="false"></textarea>
+                </div>
+                
+                <p id="kokanuOutText" class="hidden"></p>
+                <div id="kokanuOut" class="output-box mb-3"></div>
+                <button id="copyKokanu" type="button" class="btn btn-primary">Copy | oʋſ</button>
+
+                <div class="mt-4 mb-3">
+                    <label for="kokanuIn" class="form-label fs-4">ʋıx ‹xʃxƨſ› –</label>
+                    <textarea id="kokanuIn" class="form-control form-control-lg" rows="3" spellcheck="false"></textarea>
+                </div>
+                
+                <p id="latinOutText" class="hidden"></p>
+                <div id="latinOut" class="output-box mb-3"></div>
+                <button id="copyLatin" type="button" class="btn btn-primary">Copy | oʋſ</button>
+            </div>
         </div>
-        <div class="hidden" id="kokanuOutText"></div>
-        <p id="kokanuOut"></p>
-        <button id="copyKokanu" type="button">Copy | oʋſ</button>
-    
-        <br />
-        <br />
-        <div class="inWrapper">
-        ʋıx ‹xʃxƨſ›–
-        <textarea id="kokanuIn" cols="80" rows="3" spellcheck="false"></textarea>
-        </div>
-        <div class="hidden" id="latinOutText"></div>
-        <p id="latinOut"></p>
-        <button id="copyLatin" type="button">Copy | oʋſ</button>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
     <script src="script.js"></script>
 </body>
 </html>
-

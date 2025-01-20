@@ -1,31 +1,29 @@
-.inWrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  
-  #kokanuOut, #latinOut {
-    margin-top: 5px;
-    padding: 3px;
-    border: 2px solid black;
-    min-width: 400px;
-    min-height: 20px;
-    border-radius: 5px;
-    font-size: 1.5em;
-    resize: vertical;
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans");
+        
+body {
     font-family: "Noto Sans", sans-serif;
-  }
-  
-  .hidden {
+    font-size: 1.2em;
+}
+
+.hidden {
     display: none;
-  }
-  
-  button.flash {
+}
+
+.output-box {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    min-height: 50px;
+    overflow-x: auto;
+}
+
+button.flash {
     animation: flash 1s linear forwards;
-  }
-  
-  @keyframes flash {
-   0% { color: red; }
-   100% { color: black; } 
-  }
-  
+}
+
+@keyframes flash {
+    0% { color: red; }
+    100% { color: black; } 
+}
