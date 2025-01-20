@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Likanu Transliterator</title>
+    <!-- Importing the CSS file -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="main-particle-particle" class="g-particle">
+        <h3>Translator</h3>
+        <fieldset>
+        <legend>Diacritics</legend>
+        <label><input id="ouTypeMacron" type="radio" name="ouType" checked="checked" />
+            macron /pon/ = [ ʜ̄ʃ ] /tun/ = [ x̄ſ ]
+        </label>
+        <br />
+        <label><input id="ouTypeTilde" type="radio" name="ouType" />
+            tilde /pon/ = [ ʜ̃ʃ ] /tun/ = [ x̃ſ ]
+        </label>
+        <br />
+        <label><input id="ouTypeBMacra" type="radio" name="ouType" />
+            macron-grave /pon/ = [ ʜ᷆ʃ ] /tun/ = [ x᷆ſ ]
+        </label>
+        <br />
+        <label><input id="ouTypeVertical" type="radio" name="ouType" />
+            vertical tilde /pon/ = [ ʜ̾ʃ ] /tun/ = [ x̾ſ ]
+        </label>
+        </fieldset>
+        <fieldset>
+        <legend>Punctuation</legend>
+        <label><input id="quoteTypeSquare" type="radio" name="quoteType" checked="checked" />
+            ｢ and ｣
+        </label>
+        <br />
+        <label><input id="quoteTypeButton" type="radio" name="quoteType" />
+            ◖ and ◗
+        </label>
+        <br />
+        <label><input id="commaToggle" type="checkbox" checked="checked" />
+            , = ､
+        </label>
+        </fieldset>
+        <div class="inWrapper">
+        Latin:
+        <textarea id="latinIn" cols="80" rows="3" spellcheck="false">a an i in e en u un o on
+    pa pan pi pin pe pen pu pun po pon
+    ta tan ti tin te ten tu tun to ton
+    ka kan ki kin ke ken ku kun ko kon
+    wa wan wi win we wen wu wun wo won
+    la lan li lin le len lu lun lo lon
+    ja jan ji jin je jen ju jun jo jon
+    ma man mi min me men mu mun mo mon
+    na nan ni nin ne nen nu nun no non
+    sa san si sin se sen su sun so son
+    ha han hi hin he hen hu hun ho hon
+    ca can ci cin ce cen cu cun co con
+    " " { } , . : ? !</textarea>
+        </div>
+        <div class="hidden" id="kokanuOutText"></div>
+        <p id="kokanuOut"></p>
+        <button id="copyKokanu" type="button">Copy | oʋſ</button>
+    
+        <br />
+        <br />
+        <div class="inWrapper">
+        ʋıx ‹xʃxƨſ›–
+        <textarea id="kokanuIn" cols="80" rows="3" spellcheck="false"></textarea>
+        </div>
+        <div class="hidden" id="latinOutText"></div>
+        <p id="latinOut"></p>
+        <button id="copyLatin" type="button">Copy | oʋſ</button>
+    <script src="script.js"></script>
+</body>
+</html>
+
