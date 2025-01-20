@@ -11,10 +11,10 @@ let ouTypeBMacra = document.getElementById("ouTypeBMacra");
 let ouTypeVertical = document.getElementById("ouTypeVertical");
 let commaToggle = document.getElementById("commaToggle");
 let latinIn = document.getElementById("latinIn");
-let kokanuOutText = document.getElementById("kokanuOutText");
-let kokanuOut = document.getElementById("kokanuOut");
-let copyKokanu = document.getElementById("copyKokanu");
-let kokanuIn = document.getElementById("kokanuIn");
+let likanuOutText = document.getElementById("likanuOutText");
+let likanuOut = document.getElementById("likanuOut");
+let copyLikanu = document.getElementById("copyLikanu");
+let likanuIn = document.getElementById("likanuIn");
 let latinOutText = document.getElementById("latinOutText");
 let latinOut = document.getElementById("latinOut");
 let copyLatin = document.getElementById("copyLatin");
@@ -42,7 +42,7 @@ latinIn.oninput = function (e) {
     let quotation = quoteTypeSquare.checked
         ? ["\uFF62", "\uFF63"]
         : ["\u25D6", "\u25D7"];
-    kokanuOutText.innerText = latinIn.value
+    likanuOutText.innerText = latinIn.value
         // Pre-process quotation marks, replacing with [ and ] as placeholder quotation marks
         .split('"')
         .reduce((acc, v, i) => acc + (i % 2 ? "[" : "]") + v)
@@ -72,24 +72,24 @@ latinIn.oninput = function (e) {
         // because this initial step uses innerText for safer DOM modification
         .replace(/\r?\n/g, "\uFFFE");
     // Update actual output through innerHTML and only now update line breaks
-    kokanuOut.innerHTML = kokanuOutText.innerHTML.replace(/\uFFFE/g, "<br />");
+    likanuOut.innerHTML = likanuOutText.innerHTML.replace(/\uFFFE/g, "<br />");
 };
 
-copyKokanu.onclick = (e) => {
+copyLikanu.onclick = (e) => {
     // Copy the text inside the text field
-    navigator.clipboard.writeText(kokanuOut.innerText);
+    navigator.clipboard.writeText(likanuOut.innerText);
     e.target.classList.add("flash");
     setTimeout(() => e.target.classList.remove("flash"), 1000);
 };
 
-kokanuIn.oninput = function (e) {
+likanuIn.oninput = function (e) {
     url.searchParams.delete("lik");
-    if (kokanuIn.value) {
-        url.searchParams.set("lik", kokanuIn.value);
+    if (likanuIn.value) {
+        url.searchParams.set("lik", likanuIn.value);
     }
     window.history.pushState(window.history.state, "", url);
 
-    latinOutText.innerText = kokanuIn.value
+    latinOutText.innerText = likanuIn.value
         // Replace puncutation (aside from transliteration marks)
         .replace(/\uFF64/g, ",")
         .replace(/:/g, ".")
@@ -130,9 +130,9 @@ kokanuIn.oninput = function (e) {
 };
 
 latinIn.onfocus = (e) => e.target.select();
-kokanuOutText.onfocus = (e) => e.target.select();
+likanuOutText.onfocus = (e) => e.target.select();
 
-kokanuIn.onfocus = (e) => e.target.select();
+likanuIn.onfocus = (e) => e.target.select();
 latinOutText.onfocus = (e) => e.target.select();
 
 copyLatin.onclick = (e) => {
@@ -160,7 +160,7 @@ ca can ci cin ce cen cu cun co con
 " " { } , . : ? !`;
 }
 if (url.searchParams.has("lik")) {
-    kokanuIn.textContent = url.searchParams.get("lik");
+    likanuIn.textContent = url.searchParams.get("lik");
 }
 latinIn.oninput();
-kokanuIn.oninput();
+likanuIn.oninput();
