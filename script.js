@@ -76,7 +76,7 @@ ouTypeVertical.oninput = ouTypeBMacra.oninput = quoteTypeSquare.oninput = quoteT
 };
 
 latinIn.onfocus = (e) => e.target.select();
-likanuOut.onfocus = (e) => e.target.select();
+likanuIn.onfocus = (e) => e.target.select();
 
 copyLatin.onclick = (e) => {
     // Copy the text inside the text field
