@@ -10,15 +10,6 @@ body {
     display: none;
 }
 
-.output-box {
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    padding: 0.5rem;
-    background-color: #f8f9fa;
-    min-height: 50px;
-    overflow-x: auto;
-}
-
 button.flash {
     animation: flash 1s linear forwards;
 }
