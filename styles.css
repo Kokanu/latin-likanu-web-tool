@@ -10,6 +10,12 @@ body {
     display: none;
 }
 
+.output-box {
+    min-height: 2.5em;
+    max-height: 10em;
+    overflow-y: auto;
+}
+
 button.flash {
     animation: flash 1s linear forwards;
 }
