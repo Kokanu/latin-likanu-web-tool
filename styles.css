@@ -21,6 +21,6 @@ button.flash {
 }
 
 @keyframes flash {
-    0% { color: red; }
-    100% { color: black; } 
+    0% { color: var(--bs-warning); }
+    100% { color: var(--bs-btn-color); } 
 }
